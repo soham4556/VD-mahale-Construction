@@ -7,11 +7,11 @@
   flex-direction: column;
   gap: 20px;
   z-index: 20;
-  display: none; /* Desktop only by default */
+  display: none !important; /* Force hide on mobile/tablet */
 }
 
 @media (min-width: 1024px) {
-  .hero-stats-floating { display: flex; }
+  .hero-stats-floating { display: flex !important; }
 }
 
 .hero-stat-pill {

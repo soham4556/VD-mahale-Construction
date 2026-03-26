@@ -18,6 +18,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -26,6 +28,7 @@ body {
   background-color: var(--bg-page);
   line-height: 1.75;
   overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -57,7 +60,7 @@ body {
 /* HEADINGS (Plus Jakarta Sans) */
 h1, .text-h1 {
   font-family: var(--font-heading);
-  font-size: clamp(30px, 3.5vw, 42px);
+  font-size: clamp(28px, 4vw, 42px);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.5px;
@@ -66,7 +69,7 @@ h1, .text-h1 {
 
 h2, .text-h2 {
   font-family: var(--font-heading);
-  font-size: clamp(24px, 3vw, 36px);
+  font-size: clamp(24px, 3.5vw, 36px);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.3px;
@@ -148,15 +151,20 @@ p, .text-body {
 
 /* Layout Utilities */
 /* Layout Utilities */
+section {
+  padding: var(--space-4xl) 0;
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: var(--space-2xl) 0;
+    scroll-margin-top: 80px;
+  }
+}
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
-}
-
-.section-padding { padding: var(--space-4xl) 0; }
-
-@media (max-width: 768px) {
-  .section-padding { padding: var(--space-2xl) 0; }
-  .container { padding: 0 var(--space-sm); }
+  padding: 0 30px;
 }

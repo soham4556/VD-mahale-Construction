@@ -60,6 +60,12 @@
   letter-spacing: 1px;
 }
 
+@media (max-width: 576px) {
+  .brand-name { font-size: 1rem; }
+  .brand-tag { display: none; }
+  .nav-brand { gap: var(--space-sm); }
+}
+
 
 .brand-tag {
   font-size: 10px;
@@ -297,10 +303,27 @@
   border-radius: 12px;
   border: none;
   font-size: 20px;
-  display: flex;
+  display: none; /* Desktop only by default */
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
+
+/* Responsiveness Utilities */
+@media (max-width: 1024px) {
+  .hide-tablet { display: none !important; }
+  .mobile-toggle { display: flex !important; }
+}
+
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 1025px) {
+  .hide-desktop { display: none !important; }
+}
+
+.w-full { width: 100%; }
 
 /* Search Overlay */
 .search-overlay {

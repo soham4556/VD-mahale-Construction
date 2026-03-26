@@ -200,12 +200,71 @@
 }
 
 @media (max-width: 992px) {
-  .hero-title { font-size: 3rem; }
+  .hero-title { font-size: clamp(36px, 6vw, 56px); }
+  .hero-subtitle { font-size: 1.1rem; margin-bottom: 30px; }
   .hero-actions { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin: 0 auto;
+    gap: 30px;
+  }
+}
+
 @media (max-width: 576px) {
-  .hero-title { font-size: 2.5rem; }
-  .hero-subtitle { font-size: 1.1rem; }
-  .hero-overflow { min-height: 600px; }
+  .hero-overflow { 
+    min-height: auto; 
+    height: 100vh; 
+    padding: 200px 0 60px !important; /* Even more padding */
+  }
+  .hero-title { 
+    font-size: 1.75rem; 
+    margin-bottom: 20px; 
+    line-height: 1.25; 
+    white-space: normal;
+  }
+  .hero-subtitle { 
+    font-size: 0.85rem; 
+    margin-bottom: 30px; 
+    opacity: 0.8;
+  }
+  .hero-label { 
+    margin-bottom: 15px; 
+    font-size: 9px; 
+    letter-spacing: 1.5px; 
+  }
+  .hero-text-container .p-8 { 
+    padding: 20px !important; 
+    border-radius: 20px;
+  }
+  .hero-actions {
+    gap: 15px;
+  }
+  .btn.btn-lg {
+    padding: 12px 20px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+  .video-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .play-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Fix for Swiper Fade Overlap */
+.swiper-slide {
+  opacity: 0 !important;
+  transition: opacity 0.5s ease;
+}
+
+.swiper-slide-active {
+  opacity: 1 !important;
 }
