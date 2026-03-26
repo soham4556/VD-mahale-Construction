@@ -1,0 +1,122 @@
+.service-detail-body {
+  padding: 100px 0;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.back-link:hover {
+  color: var(--accent-orange);
+}
+
+.content-block h2, 
+.content-block h3 {
+  margin-bottom: 25px;
+}
+
+.content-block p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-body);
+  margin-bottom: 40px;
+}
+
+.specs-grid-full {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.full-spec-card {
+  background-color: var(--bg-light);
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  gap: 20px;
+}
+
+.full-spec-card svg { font-size: 24px; flex-shrink: 0; }
+.full-spec-card h4 { font-size: 1.1rem; margin-bottom: 5px; }
+.full-spec-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
+
+/* Sidebar */
+.sidebar-card {
+  background-color: var(--bg-white);
+  padding: 35px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 30px;
+  border: 1px solid var(--border-light);
+}
+
+.sidebar-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--accent-orange-bg);
+}
+
+.contact-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.sidebar-form input,
+.sidebar-form textarea {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--bg-light);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.sidebar-links {
+  list-style: none;
+}
+
+.sidebar-links li {
+  margin-bottom: 15px;
+}
+
+.sidebar-links a {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg-light);
+}
+
+.sidebar-links a:hover {
+  color: var(--accent-orange);
+  padding-left: 5px;
+}
+
+@media (max-width: 992px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .specs-grid-full {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,11 @@
+.privacy-content {
+  padding: 100px 0;
+  max-width: 900px !important;
+}
+
+.policy-block {
+  margin-bottom: 60px;
+}
+
+.policy-block h2 { font-size: 1.75rem; margin-bottom: 25px; color: var(--primary-blue); }
+.policy-block p { font-size: 1.1rem; line-height: 1.8; color: var(--text-body); }

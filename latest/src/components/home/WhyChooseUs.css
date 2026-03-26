@@ -1,0 +1,122 @@
+.why-section {
+  padding: 100px 0;
+  background-color: var(--bg-white);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.reasons-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.reason-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.reason-icon {
+  width: 54px;
+  height: 54px;
+  background-color: var(--accent-orange-bg);
+  color: var(--accent-orange);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.reason-info h4 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  transition: var(--transition-fast);
+}
+
+.reason-item:hover h4 {
+  color: var(--accent-orange);
+}
+
+.reason-info p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.why-image {
+  position: relative;
+  padding: 40px;
+}
+
+.img-main-why {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.experience-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 180px;
+  background-color: var(--primary-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 10px solid white;
+  box-shadow: var(--shadow-lg);
+  z-index: 5;
+}
+
+.experience-badge span {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.experience-badge p {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .reasons-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .why-image {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .experience-badge {
+    width: 130px;
+    height: 130px;
+    border-width: 6px;
+  }
+  .experience-badge span { font-size: 2rem; }
+  .experience-badge p { font-size: 10px; }
+}

@@ -1,174 +1,223 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FaMapMarkerAlt, FaExpandArrowsAlt } from 'react-icons/fa';
-
-const categories = ['All', 'Highways', 'Buildings', 'Bridges', 'Water'];
+import { FiArrowRight } from 'react-icons/fi';
+import ProjectCard from './Cards/ProjectCard';
 
 const projects = [
   {
-    id: 1,
-    title: 'NH-48 Highway Extension',
+    title: 'Delhi-Mumbai Expressway Package 7',
     category: 'Highways',
-    location: 'Maharashtra',
-    value: '₹450 Cr',
-    image: '/images/project-highway.png',
-    description: '120 km four-lane highway expansion with modern toll infrastructure.',
+    status: 'Ongoing',
+    value: '185',
+    location: 'Rajasthan, IND',
+    client: 'NHAI',
+    size: '45.8 KM',
+    duration: '24 Months',
+    image: '/images/hero.png'
   },
   {
-    id: 2,
-    title: 'Skyline Business Park',
-    category: 'Buildings',
-    location: 'Pune',
-    value: '₹280 Cr',
-    image: '/images/project-building.png',
-    description: 'State-of-the-art 25-storey commercial complex with sustainable design.',
-  },
-  {
-    id: 3,
-    title: 'Krishna River Bridge',
+    title: 'Eastern Peripheral Road Bridge',
     category: 'Bridges',
-    location: 'Karnataka',
-    value: '₹180 Cr',
-    image: '/images/project-bridge.png',
-    description: 'Multi-span prestressed concrete bridge with 800m total length.',
+    status: 'Completed',
+    value: '42',
+    location: 'Haryana, IND',
+    client: 'NHIDCL',
+    size: '1.2 KM',
+    duration: '18 Months',
+    image: '/images/service-1.png'
   },
   {
-    id: 4,
-    title: 'Jayakwadi Dam Renovation',
-    category: 'Water',
-    location: 'Maharashtra',
-    value: '₹320 Cr',
-    image: '/images/project-dam.png',
-    description: 'Comprehensive renovation and capacity enhancement of irrigation dam.',
+    title: 'Jodhpur Water Supply Tunnel',
+    category: 'Infrastructure',
+    status: 'Upcoming',
+    value: '95',
+    location: 'Jodhpur, IND',
+    client: 'PHED',
+    size: '12.5 KM',
+    duration: '36 Months',
+    image: '/images/service-2.png'
   },
   {
-    id: 5,
-    title: 'Mumbai-Nagpur Expressway',
+    title: 'Bikaner Solar Park Foundation',
+    category: 'Renewable',
+    status: 'Completed',
+    value: '28',
+    location: 'Bikaner, IND',
+    client: 'Adani Green',
+    size: '450 MW',
+    duration: '12 Months',
+    image: '/images/service-3.png'
+  },
+  {
+    title: 'Pune Metro Line 2 Corridor',
     category: 'Highways',
-    location: 'Maharashtra',
-    value: '₹680 Cr',
-    image: '/images/project-highway.png',
-    description: '210 km section of the Samruddhi Mahamarg with 6-lane access-controlled expressway.',
+    status: 'Ongoing',
+    value: '120',
+    location: 'Pune, IND',
+    client: 'PMRDA',
+    size: '8.4 KM',
+    duration: '30 Months',
+    image: '/images/service-4.png'
   },
   {
-    id: 6,
-    title: 'Godavari Flyover',
-    category: 'Bridges',
-    location: 'Nashik',
-    value: '₹95 Cr',
-    image: '/images/project-bridge.png',
-    description: 'Urban flyover spanning 1.2 km, reducing congestion in the city center.',
-  },
+    title: 'Gujarat Industrial Belt Road',
+    category: 'Highways',
+    status: 'Completed',
+    value: '75',
+    location: 'Surat, IND',
+    client: 'GIDC',
+    size: '22 KM',
+    duration: '20 Months',
+    image: '/images/service-1.png'
+  }
 ];
 
-const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+const categories = ['All', 'Highways', 'Bridges', 'Renewable', 'Infrastructure'];
 
-  const filtered = activeFilter === 'All'
-    ? projects
-    : projects.filter((p) => p.category === activeFilter);
+const Projects = () => {
+  const [activeTab, setActiveTab] = useState('All');
+  const [isChanging, setIsChanging] = useState(false);
+
+  const handleTabChange = (cat) => {
+    setIsChanging(true);
+    setActiveTab(cat);
+    setTimeout(() => setIsChanging(false), 600);
+  };
+
+  const filteredProjects = activeTab === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === activeTab);
 
   return (
-    <section id="projects" className="py-24 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="text-yellow-500 font-semibold text-sm tracking-wider uppercase">
-            Our Portfolio
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            Featured <span className="text-yellow-500">Projects</span>
-          </h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A showcase of our landmark projects that define India&apos;s modern infrastructure landscape.
-          </p>
-          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mx-auto rounded-full" />
-        </motion.div>
+    <section id="projects" className="relative py-32 bg-primary overflow-hidden">
+      {/* Background Blobs */}
+      <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeFilter === cat
-                  ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-black shadow-lg shadow-yellow-400/25'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="overline-label mb-4"
             >
-              {cat}
-            </button>
-          ))}
-        </motion.div>
+              Portfolio
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-white text-4xl md:text-5xl font-bold mb-6"
+            >
+              Transforming Visions into <br/>
+              <span className="text-gradient-accent">Concrete Reality</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-white/60"
+            >
+              Explore our landmark projects across different sectors, showcasing 
+              our engineering prowess and commitment to timely delivery.
+            </motion.p>
+          </div>
 
-        {/* Projects Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300"
+          {/* Filter Tabs - Dashboard Style */}
+          <div className="flex p-1.5 glass-card glass-l1 border-white/10 rounded-2xl overflow-x-auto no-scrollbar scroll-smooth" role="tablist" aria-label="Project Categories">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                role="tab"
+                aria-selected={activeTab === cat}
+                aria-controls="project-grid"
+                onClick={() => handleTabChange(cat)}
+                className={`relative px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 min-w-fit ${
+                  activeTab === cat 
+                    ? 'text-accent' 
+                    : 'text-white/60 hover:text-white'
+                }`}
               >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
+                {activeTab === cat && (
+                  <motion.div 
+                    layoutId="project-tab"
+                    className="absolute inset-0 bg-white/10 dark:bg-white/5 rounded-xl border border-white/10"
                   />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-100">
-                      <FaExpandArrowsAlt className="text-black" size={18} />
-                    </div>
-                  </div>
-                  {/* Category badge */}
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-yellow-400 text-black text-xs font-bold rounded-full">
-                    {project.category}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400">
-                      <FaMapMarkerAlt size={12} className="text-yellow-500" />
-                      {project.location}
-                    </span>
-                    <span className="font-bold text-yellow-600 dark:text-yellow-400">
-                      {project.value}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
             ))}
+          </div>
+        </div>
+
+        {/* Project Grid / Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[600px]">
+          <AnimatePresence mode="wait">
+            {isChanging ? (
+              <motion.div 
+                key="skeleton-grid"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className="glass-card glass-l1 border-white/5 h-[400px] p-6 space-y-4 animate-pulse">
+                    <div className="w-full h-48 bg-white/5 rounded-2xl" />
+                    <div className="w-2/3 h-6 bg-white/5 rounded-lg" />
+                    <div className="w-full h-4 bg-white/5 rounded-lg" />
+                    <div className="w-1/2 h-4 bg-white/5 rounded-lg" />
+                  </div>
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div 
+                key="project-grid"
+                id="project-grid"
+                role="tabpanel"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {filteredProjects.map((project, index) => (
+                  <motion.div
+                    key={project.title}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <ProjectCard {...project} index={index} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
+
+        {/* Explore More Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <a
+            href="#"
+            aria-label="View our full portfolio of infrastructure projects"
+            className="group inline-flex items-center gap-4 px-10 py-5 glass-card glass-l1 border-white/20 text-white font-bold rounded-2xl hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
+          >
+            <span>View All Projects</span>
+            <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white group-hover:translate-x-1 transition-transform" aria-hidden="true">
+              <FiArrowRight size={16} />
+            </div>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

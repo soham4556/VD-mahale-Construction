@@ -1,86 +1,92 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaProjectDiagram, FaUsers, FaClock, FaHardHat } from 'react-icons/fa';
+import { FiBriefcase, FiAward, FiClock, FiUsers } from 'react-icons/fi';
 
 const stats = [
-  { icon: FaProjectDiagram, value: 500, suffix: '+', label: 'Projects Completed' },
-  { icon: FaUsers, value: 350, suffix: '+', label: 'Happy Clients' },
-  { icon: FaClock, value: 18, suffix: '+', label: 'Years Experience' },
-  { icon: FaHardHat, value: 200, suffix: '+', label: 'Team Members' },
+  { icon: FiBriefcase, value: 500, suffix: '+', label: 'Projects Completed' },
+  { icon: FiAward, value: 25, suffix: '+', label: 'Prestigious Awards' },
+  { icon: FiClock, value: 18, suffix: '+', label: 'Years Experience' },
+  { icon: FiUsers, value: 350, suffix: '+', label: 'Happy Clients' },
 ];
 
-const AnimatedCounter = ({ target, suffix, inView }) => {
+const AnimatedCounter = ({ target, inView }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
-    let start = 0;
+    
+    let startTime;
     const duration = 2000;
-    const increment = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
+    
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      // Power 4 Out easing
+      const easedProgress = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easedProgress * target));
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
       }
-    }, 16);
-    return () => clearInterval(timer);
+    };
+    
+    requestAnimationFrame(animate);
   }, [inView, target]);
 
-  return (
-    <span>
-      {count}{suffix}
-    </span>
-  );
+  return <span className="stat-number">{count}</span>;
 };
 
 const Stats = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          src="/images/hero.png"
-          alt=""
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-black/80" />
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600" />
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-400" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <div className="relative z-40 -mt-16 sm:-mt-20 container mx-auto px-6" ref={ref}>
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={inView ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
+        className="glass-card glass-l3 border-white/20 p-8 sm:p-12 shadow-xl"
+      >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 relative">
           {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="text-center"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 bg-yellow-400/20 rounded-2xl flex items-center justify-center border border-yellow-400/30">
-                <stat.icon className="text-yellow-400" size={28} />
+            <div key={stat.label} className="relative group text-center lg:text-left">
+              {/* Vertical Divider */}
+              {index !== 0 && (
+                <div className="hidden lg:block absolute left-[-2rem] top-1/2 -translate-y-1/2 w-[1px] h-16 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
+              )}
+              
+              <div className="relative z-10">
+                  <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-6 w-full">
+                    {/* Icon with glow */}
+                    <div className="w-14 h-14 rounded-2xl glass-card glass-l1 border-white/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:shadow-glow-orange transition-all duration-500 shrink-0">
+                      <stat.icon size={24} />
+                    </div>
+                    
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                      <div className="flex items-center gap-1">
+                        <AnimatedCounter target={stat.value} inView={inView} />
+                        <span className="stat-number text-accent">{stat.suffix}</span>
+                      </div>
+                      <div className="w-10 h-0.5 bg-accent/30 rounded-full my-2 transition-all duration-500 group-hover:w-16 group-hover:bg-accent" />
+                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">
+                        {stat.label}
+                      </p>
+                    </div>
+                  </div>
               </div>
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-2">
-                <AnimatedCounter target={stat.value} suffix={stat.suffix} inView={inView} />
-              </div>
-              <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">
-                {stat.label}
-              </div>
-            </motion.div>
+
+              {/* Ghost background icon */}
+              <stat.icon 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] rotate-[-10deg] group-hover:rotate-0 transition-transform duration-1000 pointer-events-none" 
+                size={80} 
+              />
+            </div>
           ))}
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   );
 };
 

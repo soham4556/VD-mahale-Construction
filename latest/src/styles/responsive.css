@@ -1,0 +1,32 @@
+:root {
+  /* Fluid Typography with clamp() */
+  /* Formula: clamp(min, preferred, max) */
+  --font-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.85rem);
+  --font-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.95rem);
+  --font-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+  --font-lg: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  --font-xl: clamp(1.3rem, 1.15rem + 0.75vw, 1.75rem);
+  --font-2xl: clamp(1.6rem, 1.4rem + 1vw, 2.25rem);
+  --font-3xl: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+  --font-4xl: clamp(2.5rem, 2rem + 2vw, 4.5rem);
+  --font-display: clamp(3.5rem, 3rem + 5vw, 8rem);
+}
+
+/* Performance-Optimized Glass Fallbacks for Mobile */
+@media (max-width: 768px) {
+  .glass-card, .premium-card-base, .glass-navbar {
+    /* Reduce blur complexity for mobile GPUs */
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+  }
+}
+
+/* Prevent layout shift during page transitions on mobile */
+.page-wrapper {
+  min-height: calc(100vh - var(--nav-height));
+  padding-bottom: 80px; /* Space for BottomBar on mobile */
+}
+
+@media (min-width: 769px) {
+  .page-wrapper { padding-bottom: 0; }
+}

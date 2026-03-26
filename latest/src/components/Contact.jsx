@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaPaperPlane } from 'react-icons/fa';
+import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiCheckCircle } from 'react-icons/fi';
 
 const contactInfo = [
   {
-    icon: FaPhone,
-    title: 'Phone',
-    details: ['+91 98765 43210', '+91 87654 32109'],
+    icon: FiPhone,
+    title: 'Phone Support',
+    details: ['+91 141 4106040', '+91 98765 43210'],
+    color: 'orange'
   },
   {
-    icon: FaEnvelope,
-    title: 'Email',
+    icon: FiMail,
+    title: 'Email Inquiry',
     details: ['info@vdmahale.com', 'projects@vdmahale.com'],
+    color: 'blue'
   },
   {
-    icon: FaMapMarkerAlt,
-    title: 'Office',
-    details: ['VD Mahale Tower, Senapati Bapat Road', 'Pune, Maharashtra 411016'],
+    icon: FiMapPin,
+    title: 'Office Location',
+    details: ['Senapati Bapat Road', 'Pune, Maharashtra 411016'],
+    color: 'green'
   },
   {
-    icon: FaClock,
+    icon: FiClock,
     title: 'Working Hours',
-    details: ['Mon - Sat: 9:00 AM - 6:00 PM', 'Sunday: Closed'],
+    details: ['Mon - Sat: 9:00 - 18:00', 'Sunday: Closed'],
+    color: 'purple'
   },
 ];
 
@@ -34,7 +38,7 @@ const Contact = () => {
     phone: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle, sending, success
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,140 +46,85 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setStatus('sending');
+    setTimeout(() => {
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      setTimeout(() => setStatus('idle'), 3000);
+    }, 1500);
   };
 
   return (
-    <section id="contact" className="py-24 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-yellow-500 font-semibold text-sm tracking-wider uppercase">
-            Get in Touch
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            Contact <span className="text-yellow-500">Us</span>
-          </h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Ready to start your next project? Reach out to us and let&apos;s build something extraordinary together.
-          </p>
-          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mx-auto rounded-full" />
-        </motion.div>
+    <section id="contact" className="relative py-32 bg-secondary overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Contact Form */}
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+        <div className="text-center mb-20">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            className="overline-label mb-4"
           >
-            <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-              <div className="grid sm:grid-cols-2 gap-5 mb-5">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
-              <div className="mb-5">
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
-                  placeholder="+91 98765 43210"
-                />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all resize-none text-gray-900 dark:text-white placeholder-gray-400"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 shadow-lg shadow-yellow-400/25 hover:shadow-yellow-400/40 flex items-center justify-center gap-2"
-              >
-                <FaPaperPlane size={16} />
-                {submitted ? 'Message Sent!' : 'Send Message'}
-              </button>
-            </form>
+            Connect With Us
           </motion.div>
-
-          {/* Contact Info & Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-2 space-y-6"
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold mb-6"
           >
-            {/* Contact Details */}
-            {contactInfo.map((info) => (
-              <div
-                key={info.title}
-                className="flex gap-4 p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
-              >
-                <div className="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center shrink-0">
-                  <info.icon className="text-yellow-500" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white text-sm mb-1">{info.title}</h4>
-                  {info.details.map((detail, i) => (
-                    <p key={i} className="text-sm text-gray-600 dark:text-gray-400">{detail}</p>
-                  ))}
-                </div>
-              </div>
-            ))}
+            Start Your <span className="text-gradient-accent">Global Partnership</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+            className="text-secondary max-w-2xl mx-auto"
+          >
+            Whether you have a query about a project or want to join our team, 
+            our door is always open. Let's build the future together.
+          </motion.p>
+        </div>
 
-            {/* Google Maps */}
-            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 h-48">
+        <div className="grid lg:grid-cols-12 gap-12">
+          {/* Contact Details */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 space-y-6"
+          >
+            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-6">
+              {contactInfo.map((info, i) => (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.3 + (i * 0.1) }}
+                  className="glass-card glass-l1 p-6 flex gap-5 group hover:border-accent/30 transition-all duration-500"
+                >
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-accent group-hover:scale-110 group-hover:shadow-glow-orange transition-all duration-500`}>
+                    <info.icon size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">{info.title}</h4>
+                    {info.details.map((detail, idx) => (
+                      <p key={idx} className="text-sm text-secondary">{detail}</p>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Map Preview */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.8 }}
+              className="glass-card glass-l2 border-white/10 h-[240px] overflow-hidden group"
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.2!2d73.8475!3d18.5177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf!2sPune!5e0!3m2!1sen!2sin!4v1650000000000!"
                 width="100%"
@@ -183,10 +132,111 @@ const Contact = () => {
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="VD Mahale Office Location"
+                title="Office Location"
+                className="grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
               />
-            </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7"
+          >
+            <form onSubmit={handleSubmit} className="glass-card glass-l2 border-white/20 p-8 md:p-12 shadow-2xl relative overflow-hidden">
+              {/* Shine Effect */}
+              <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-br from-transparent via-white/[0.03] to-transparent rotate-[45deg] pointer-events-none" />
+
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="space-y-2">
+                  <label className="text-[11px] font-bold uppercase tracking-widest text-secondary ml-1">Full Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    aria-label="Your Full Name"
+                    placeholder="e.g. Rahul Sharma"
+                    className="w-full px-6 py-4 rounded-xl glass-card glass-l1 !bg-transparent border-white/10 focus:border-accent focus:shadow-glow-orange focus:scale-[1.01] outline-none transition-all placeholder:text-white/20"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[11px] font-bold uppercase tracking-widest text-secondary ml-1">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    aria-label="Your Email Address"
+                    placeholder="rahul@example.com"
+                    className="w-full px-6 py-4 rounded-xl glass-card glass-l1 !bg-transparent border-white/10 focus:border-accent focus:shadow-glow-orange focus:scale-[1.01] outline-none transition-all placeholder:text-white/20"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2 mb-8">
+                <label className="text-[11px] font-bold uppercase tracking-widest text-secondary ml-1">Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  aria-label="Your Phone Number"
+                  placeholder="+91 98765 43210"
+                  className="w-full px-6 py-4 rounded-xl glass-card glass-l1 !bg-transparent border-white/10 focus:border-accent focus:shadow-glow-orange outline-none transition-all placeholder:text-white/20"
+                />
+              </div>
+
+              <div className="space-y-2 mb-10">
+                <label className="text-[11px] font-bold uppercase tracking-widest text-secondary ml-1">Project Details</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="5"
+                  aria-label="Project Details or Message"
+                  placeholder="Tell us about your infrastructure goals..."
+                  className="w-full px-6 py-4 rounded-xl glass-card glass-l1 !bg-transparent border-white/10 focus:border-accent focus:shadow-glow-orange outline-none transition-all resize-none placeholder:text-white/20"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status !== 'idle'}
+                aria-label="Submit contact form"
+                className={`group relative w-full md:w-auto px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl overflow-hidden shadow-glow-orange transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] ${status !== 'idle' ? 'opacity-80' : ''}`}
+              >
+                <div className="relative z-10 flex items-center justify-center gap-3">
+                  {status === 'idle' && (
+                    <>
+                      <span>Send Message</span>
+                      <FiSend className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </>
+                  )}
+                  {status === 'sending' && (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  )}
+                  {status === 'success' && (
+                    <motion.div 
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="flex items-center gap-3"
+                    >
+                      <span>Message Sent</span>
+                      <FiCheckCircle className="text-white" />
+                    </motion.div>
+                  )}
+                </div>
+                
+                {/* Button Shine Sweep */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-[1200ms]" />
+              </button>
+            </form>
           </motion.div>
         </div>
       </div>

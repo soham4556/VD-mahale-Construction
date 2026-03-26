@@ -1,0 +1,212 @@
+/* ===================================================================
+   VD MAHALE INFRA - ELITE DESIGN SYSTEM (v2.0)
+   Single Source of Truth for Design Tokens & Theme Variables
+   =================================================================== */
+
+:root {
+  /* ===================================================================
+     SECTION 1: GLASSMORPHISM POLISH SYSTEM
+     =================================================================== */
+
+  /* GLASS LEVEL 1 — Whisper Glass (Badges, Tags, Stat Pills) */
+  --glass-l1-bg: rgba(255, 255, 255, 0.4);
+  --glass-l1-blur: 12px;
+  --glass-l1-border: rgba(255, 255, 255, 0.35);
+  --glass-l1-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --glass-l1-radius: 12px;
+
+  /* GLASS LEVEL 2 — Soft Glass (Content Cards, Service Cards, Project Cards) */
+  --glass-l2-bg: rgba(255, 255, 255, 0.52);
+  --glass-l2-blur: 20px;
+  --glass-l2-saturate: 140%;
+  --glass-l2-border: rgba(255, 255, 255, 0.4);
+  --glass-l2-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --glass-l2-radius: 20px;
+
+  /* GLASS LEVEL 3 — Bold Glass (Navigation Bar, Modals, Feature Panels) */
+  --glass-l3-bg: rgba(255, 255, 255, 0.7);
+  --glass-l3-blur: 40px;
+  --glass-l3-saturate: 180%;
+  --glass-l3-border: rgba(255, 255, 255, 0.5);
+  --glass-l3-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), inset 0 2px 0 rgba(255, 255, 255, 0.8);
+  --glass-l3-radius: 24px;
+
+  /* GLASS LEVEL 4 — Deep Glass (Dark Overlays, Hero Floating Cards) */
+  --glass-l4-bg: rgba(10, 22, 40, 0.55);
+  --glass-l4-blur: 24px;
+  --glass-l4-border: rgba(255, 255, 255, 0.08);
+  --glass-l4-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --glass-l4-radius: 20px;
+
+  /* GLASS LEVEL 5 — Accent Glass (CTA Sections, Special Highlights) */
+  --glass-l5-bg: linear-gradient(135deg, rgba(245, 124, 32, 0.08) 0%, rgba(10, 143, 150, 0.05) 50%, rgba(0, 51, 102, 0.04) 100%);
+  --glass-l5-blur: 24px;
+  --glass-l5-border: rgba(245, 124, 32, 0.12);
+  --glass-l5-shadow: 0 8px 40px rgba(245, 124, 32, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --glass-l5-radius: 24px;
+
+  /* NOISE TEXTURE */
+  --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+
+  /* ===================================================================
+     SECTION 2: VISUALLY BALANCED COLOR SYSTEM (Light Mode)
+     =================================================================== */
+
+  /* PAGE BACKGROUNDS */
+  --bg-page: #FAFAFD;
+  --bg-page-gradient: linear-gradient(180deg, #FAFAFD 0%, #F2F4F9 40%, #ECEEF5 70%, #F2F4F9 100%);
+  --bg-section-alt: #F2F4F9;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-hover: #FEFEFE;
+  --bg-sunken: #ECEEF5;
+  --bg-dark-section: #0A1628;
+
+  /* TEXT HIERARCHY */
+  --text-heading: #0C1A2B;
+  --text-subheading: #1A2F47;
+  --text-body: #3B4E62;
+  --text-secondary: #5E7389;
+  --text-muted: #8C9DB1;
+  --text-placeholder: #ABB8C7;
+  --text-inverse: #F1F5F9;
+
+  /* PRIMARY PALETTE — Deep Trust Blue */
+  --primary-500: #003366;
+  --primary: var(--primary-500);
+  --primary-subtle: rgba(0, 51, 102, 0.05);
+
+  /* ACCENT PALETTE — Construction Orange */
+  --accent-400: #FF9A44;
+  --accent-500: #F57C20;
+  --accent-600: #D86A10;
+  --accent: var(--accent-500);
+  --accent-subtle: rgba(245, 124, 32, 0.07);
+  --accent-gradient: linear-gradient(135deg, #F57C20 0%, #FF9A44 50%, #FFBA6B 100%);
+  --accent-glow: rgba(245, 124, 32, 0.22);
+
+  /* SECONDARY PALETTE — Balanced Teal */
+  --teal-500: #0A8F96;
+  --teal: var(--teal-500);
+  --teal-subtle: rgba(10, 143, 150, 0.06);
+
+  /* BORDERS */
+  --border-lightest: rgba(0, 0, 0, 0.04);
+  --border-light: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.15);
+  --border-focus: rgba(245, 124, 32, 0.5);
+
+  /* SHADOWS */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.07);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.09);
+  --shadow-accent-glow: 0 4px 24px rgba(245, 124, 32, 0.22);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* BLOBS */
+  --blob-1: rgba(245, 124, 32, 0.1);
+  --blob-2: rgba(0, 51, 102, 0.08);
+  --blob-3: rgba(10, 143, 150, 0.06);
+
+  /* TYPOGRAPHY STANDARDS */
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* ===================================================================
+   DARK THEME OVERRIDES
+   =================================================================== */
+
+html[data-theme="dark"] {
+  /* DARK GLASS OVERRIDES */
+  --glass-l1-bg: rgba(255, 255, 255, 0.04);
+  --glass-l1-border: rgba(255, 255, 255, 0.06);
+  --glass-l1-shadow: 0 2px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  --glass-l2-bg: rgba(255, 255, 255, 0.05);
+  --glass-l2-border: rgba(255, 255, 255, 0.07);
+  --glass-l2-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  --glass-l3-bg: rgba(15, 23, 42, 0.72);
+  --glass-l3-border: rgba(255, 255, 255, 0.08);
+  --glass-l3-shadow: 0 12px 48px rgba(0, 0, 0, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.04);
+
+  --glass-l4-bg: rgba(2, 6, 15, 0.6);
+  --glass-l4-border: rgba(255, 255, 255, 0.05);
+  --glass-l4-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  --glass-l5-bg: linear-gradient(135deg, rgba(251, 146, 60, 0.06) 0%, rgba(45, 212, 191, 0.03) 50%, rgba(96, 165, 250, 0.03) 100%);
+  --glass-l5-border: rgba(251, 146, 60, 0.1);
+  --glass-l5-shadow: 0 8px 40px rgba(251, 146, 60, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  /* DARK PAGE BACKGROUNDS */
+  --bg-page: #0A0F1E;
+  --bg-page-gradient: linear-gradient(180deg, #0A0F1E 0%, #0E1528 40%, #111B2E 70%, #0E1528 100%);
+  --bg-section-alt: #0E1528;
+  --bg-elevated: #162032;
+  --bg-elevated-hover: #1C2840;
+  --bg-sunken: #080C18;
+
+  /* DARK TEXT HIERARCHY */
+  --text-heading: #EDF2F7;
+  --text-subheading: #D6DDE6;
+  --text-body: #A8B8CA;
+  --text-secondary: #7E91A7;
+  --text-muted: #566A80;
+  --text-inverse: #0C1A2B;
+
+  /* DARK PRIMARY PALETTE */
+  --primary: #60A5FA;
+  --primary-subtle: rgba(96, 165, 250, 0.08);
+
+  /* DARK ACCENT PALETTE */
+  --accent: #FB923C;
+  --accent-subtle: rgba(251, 146, 60, 0.08);
+  --accent-gradient: linear-gradient(135deg, #F97316 0%, #FB923C 50%, #FDBA74 100%);
+  --accent-glow: rgba(251, 146, 60, 0.18);
+
+  /* DARK BORDERS */
+  --border-lightest: rgba(255, 255, 255, 0.03);
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(251, 146, 60, 0.4);
+
+  /* DARK SHADOWS */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.35);
+  --shadow-accent-glow: 0 4px 24px rgba(251, 146, 60, 0.18);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.3);
+
+  /* DARK BLOBS */
+  --blob-1: rgba(251, 146, 60, 0.06);
+  --blob-2: rgba(96, 165, 250, 0.04);
+  --blob-3: rgba(45, 212, 191, 0.03);
+}
+
+/* Base Glass Variable mapping to level 2 (Soft Glass) as default */
+:root {
+  --glass-bg: var(--glass-l2-bg);
+  --glass-blur: var(--glass-l2-blur);
+  --glass-border: var(--glass-l2-border);
+  --glass-shadow: var(--glass-l2-shadow);
+  --glass-radius: var(--glass-l2-radius);
+  
+  /* Standard Aliases for project usage */
+  --bg-primary: var(--bg-page);
+  --bg-secondary: var(--bg-section-alt);
+  --bg-card: var(--bg-elevated);
+  --border: var(--border-light);
+  --primary-blue: var(--primary);
+  --accent-orange: var(--accent);
+}

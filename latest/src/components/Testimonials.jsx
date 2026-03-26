@@ -1,171 +1,205 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FaQuoteLeft, FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa';
+import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
+import { FaQuoteLeft } from 'react-icons/fa';
 
 const testimonials = [
   {
-    id: 1,
-    name: 'Rajesh Sharma',
-    role: 'Director, Sharma Developers',
-    text: 'VD Mahale Construction exceeded our expectations on the commercial complex project. Their attention to detail, strict adherence to timelines, and professional approach make them our go-to construction partner.',
-    rating: 5,
+    name: 'Sanjeev Kumar',
+    position: 'Chief Engineer, NHAI',
+    quote: "VD Mahale Infrastructure has consistently delivered high-quality road projects ahead of schedule. Their attention to technical detail and site safety is exemplary in the industry.",
+    avatar: 'https://i.pravatar.cc/150?u=sanjeev',
+    rating: 5
   },
   {
-    id: 2,
-    name: 'Priya Patil',
-    role: 'Project Head, NHAI',
-    text: 'The highway project was completed ahead of schedule with exceptional quality. Their team demonstrated outstanding technical expertise and project management skills throughout the engagement.',
-    rating: 5,
+    name: 'Anjali Deshmukh',
+    position: 'Director, Smart Cities Mission',
+    quote: "Their approach to urban infrastructure integration is visionary. The bridge and flyover projects they completed for us have significantly reduced congestion and improved quality of life.",
+    avatar: 'https://i.pravatar.cc/150?u=anjali',
+    rating: 5
   },
   {
-    id: 3,
-    name: 'Amit Deshmukh',
-    role: 'CEO, Deshmukh Industries',
-    text: 'Working with VD Mahale has been a phenomenal experience. Their commitment to sustainable construction practices and use of modern technology sets them apart in the industry.',
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: 'Sneha Joshi',
-    role: 'Municipal Commissioner',
-    text: 'The bridge construction project was a landmark achievement for our city. VD Mahale delivered a world-class structure that has transformed our urban connectivity.',
-    rating: 5,
-  },
+    name: 'Vikram Singh',
+    position: 'Project Manager, Adani Green',
+    quote: "Excellent EPC services for our latest solar farm project. The structural foundations and electrical ducting work were performed with high precision and speed.",
+    avatar: 'https://i.pravatar.cc/150?u=vikram',
+    rating: 4
+  }
 ];
 
 const Testimonials = () => {
-  const [current, setCurrent] = useState(0);
+  const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
-  const next = useCallback(() => {
+  const next = () => {
     setDirection(1);
-    setCurrent((prev) => (prev + 1) % testimonials.length);
-  }, []);
+    setIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prev = () => {
     setDirection(-1);
-    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  // Auto-rotation
   useEffect(() => {
-    const timer = setInterval(next, 5000);
+    const timer = setInterval(next, 8000);
     return () => clearInterval(timer);
-  }, [next]);
+  }, []);
 
   const variants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 300 : -300,
+    enter: (dir) => ({
+      x: dir > 0 ? 300 : -300,
       opacity: 0,
+      scale: 0.9,
+      rotateY: dir > 0 ? 45 : -45
     }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({
-      x: direction < 0 ? 300 : -300,
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      zIndex: 1
+    },
+    exit: (dir) => ({
+      x: dir < 0 ? 300 : -300,
       opacity: 0,
-    }),
+      scale: 0.9,
+      rotateY: dir < 0 ? 45 : -45,
+      zIndex: 0
+    })
   };
 
   return (
-    <section id="testimonials" className="py-24 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-yellow-500 font-semibold text-sm tracking-wider uppercase">
-            Client Reviews
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            What Our <span className="text-yellow-500">Clients Say</span>
-          </h2>
-          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mx-auto rounded-full" />
-        </motion.div>
+    <section id="testimonials" className="relative py-32 bg-primary overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-[160px] pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="overline-label mb-4"
+          >
+            Testimonials
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white text-4xl md:text-5xl font-bold mb-6"
+          >
+            Voice of Our <span className="text-gradient-accent">Global Partners</span>
+          </motion.h2>
+          <p className="text-white/60">Trust is the foundation of every structure we build.</p>
+        </div>
 
-        {/* Testimonial Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative max-w-4xl mx-auto"
-        >
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 sm:p-12 border border-gray-100 dark:border-gray-700 shadow-lg min-h-[300px] flex items-center overflow-hidden">
-            <AnimatePresence mode="wait" custom={direction}>
+        <div className="relative max-w-5xl mx-auto h-[450px] md:h-[400px]">
+          <AnimatePresence initial={false} custom={direction}>
               <motion.div
-                key={current}
+                key={index}
                 custom={direction}
                 variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className="w-full"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = Math.abs(offset.x) > 50;
+                  if (swipe) {
+                    if (offset.x > 0) prev();
+                    else next();
+                  }
+                }}
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.4 },
+                  rotateY: { duration: 0.6 }
+                }}
+                className="absolute inset-0 cursor-grab active:cursor-grabbing"
               >
-                <FaQuoteLeft className="text-yellow-400/30 mb-6" size={40} />
-                <p className="text-gray-700 dark:text-gray-200 text-lg sm:text-xl leading-relaxed mb-8 italic">
-                  &ldquo;{testimonials[current].text}&rdquo;
-                </p>
-
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                    <FaStar key={i} className="text-yellow-400" size={16} />
-                  ))}
+              <div className="h-full glass-card glass-l2 border-white/10 p-8 md:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden">
+                {/* Large Background Quote */}
+                <FaQuoteLeft className="absolute top-[-20px] left-[-20px] text-white/5 text-[200px] -z-10" />
+                
+                {/* Avatar with accent ring */}
+                <div className="relative shrink-0">
+                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full p-2 border-2 border-dashed border-accent/40 animate-spin-slow">
+                    <div className="w-full h-full rounded-full border-4 border-white overflow-hidden shadow-2xl">
+                      <img 
+                        src={testimonials[index].avatar} 
+                        alt={testimonials[index].name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  {/* Floating badge */}
+                  <div className="absolute -bottom-2 -right-2 bg-accent text-white p-2 rounded-lg shadow-glow-orange">
+                    <FiStar fill="currentColor" />
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-black font-bold text-lg">
-                    {testimonials[current].name.charAt(0)}
+                <div className="flex flex-col flex-grow text-center md:text-left">
+                  {/* Rating Stars */}
+                  <div className="flex gap-1 mb-6 justify-center md:justify-start">
+                    {[...Array(5)].map((_, i) => (
+                      <FiStar 
+                        key={i} 
+                        size={18} 
+                        className={i < testimonials[index].rating ? "fill-accent text-accent" : "text-white/20"} 
+                      />
+                    ))}
                   </div>
+
+                  <p className="text-lg md:text-xl font-medium text-white italic leading-relaxed mb-8 font-inter">
+                    "{testimonials[index].quote}"
+                  </p>
+
                   <div>
-                    <div className="font-bold text-gray-900 dark:text-white">
-                      {testimonials[current].name}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {testimonials[current].role}
-                    </div>
+                    <h4 className="text-xl font-bold text-white mb-1">{testimonials[index].name}</h4>
+                    <p className="text-accent text-sm font-bold uppercase tracking-widest">{testimonials[index].position}</p>
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
-          {/* Navigation buttons */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 w-12 h-12 bg-white dark:bg-gray-700 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition-all duration-200"
-            aria-label="Previous testimonial"
-          >
-            <FaChevronLeft size={16} />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 w-12 h-12 bg-white dark:bg-gray-700 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition-all duration-200"
-            aria-label="Next testimonial"
-          >
-            <FaChevronRight size={16} />
-          </button>
-
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => { setDirection(index > current ? 1 : -1); setCurrent(index); }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === current
-                    ? 'bg-yellow-400 w-8'
-                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-yellow-400/50'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+          {/* Navigation Controls */}
+          <div className="absolute -bottom-12 md:bottom-auto md:top-1/2 md:-translate-y-1/2 left-0 right-0 flex justify-center md:justify-between px-4 md:-px-12 gap-8 z-20">
+            <button
+              onClick={prev}
+              className="w-12 h-12 rounded-xl glass-card glass-l1 text-white hover:bg-accent hover:border-accent transition-all duration-300 flex items-center justify-center shadow-lg"
+            >
+              <FiChevronLeft size={24} />
+            </button>
+            <button
+              onClick={next}
+              className="w-12 h-12 rounded-xl glass-card glass-l1 text-white hover:bg-accent hover:border-accent transition-all duration-300 flex items-center justify-center shadow-lg"
+            >
+              <FiChevronRight size={24} />
+            </button>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Progress Indicators */}
+        <div className="mt-12 md:mt-4 flex justify-center gap-3">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                setDirection(i > index ? 1 : -1);
+                setIndex(i);
+              }}
+              className={`h-1.5 transition-all duration-500 rounded-full ${
+                index === i ? 'w-10 bg-accent' : 'w-3 bg-white/20 hover:bg-white/40'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

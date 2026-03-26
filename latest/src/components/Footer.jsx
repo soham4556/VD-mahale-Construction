@@ -1,162 +1,144 @@
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube, FaPhone, FaEnvelope, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
-
-const quickLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About Us', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
-];
-
-const serviceLinks = [
-  'Road Construction',
-  'Bridge Construction',
-  'Civil Engineering',
-  'Infrastructure Development',
-  'Project Management',
-  'Water Infrastructure',
-];
-
-const socialLinks = [
-  { icon: FaFacebookF, href: '#', label: 'Facebook' },
-  { icon: FaTwitter, href: '#', label: 'Twitter' },
-  { icon: FaLinkedinIn, href: '#', label: 'LinkedIn' },
-  { icon: FaInstagram, href: '#', label: 'Instagram' },
-  { icon: FaYoutube, href: '#', label: 'YouTube' },
-];
+import { motion } from 'framer-motion';
+import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiYoutube, FiPhone, FiMail, FiMapPin, FiArrowUp } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
-  const handleClick = (e, href) => {
-    e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const currentYear = new Date().getFullYear();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const footerLinks = {
+    organization: [
+      { name: 'Introduction', href: '#about' },
+      { name: 'Leadership', href: '#' },
+      { name: 'Vision & Mission', href: '#' },
+      { name: 'Awards', href: '#' },
+    ],
+    businesses: [
+      { name: 'Roads & Highways', href: '#' },
+      { name: 'Railways', href: '#' },
+      { name: 'Metro Projects', href: '#' },
+      { name: 'Renewable Energy', href: '#' },
+    ],
+    quicklinks: [
+      { name: 'Career Opportunities', href: '#' },
+      { name: 'Investor Relations', href: '#' },
+      { name: 'Media Center', href: '#' },
+      { name: 'Contact Us', href: '#contact' },
+    ]
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      {/* CTA Banner */}
-      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-2xl sm:text-3xl font-black text-black">
-              Ready to Start Your Project?
-            </h3>
-            <p className="text-black/70 mt-1">
-              Let&apos;s discuss your next construction or infrastructure project.
-            </p>
-          </div>
-          <a
-            href="#contact"
-            onClick={(e) => handleClick(e, '#contact')}
-            className="px-8 py-4 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-colors duration-200 flex items-center gap-2 whitespace-nowrap"
-          >
-            Get Started <FaArrowRight size={14} />
-          </a>
-        </div>
-      </div>
+    <footer className="relative bg-[#0B1121] text-white pt-24 pb-12 overflow-hidden">
+      {/* Background blobs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Company Info */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                <span className="text-black font-black text-lg">VD</span>
-              </div>
-              <div>
-                <span className="font-bold text-xl text-white">VD Mahale</span>
-                <span className="block text-[10px] uppercase tracking-[0.2em] -mt-1 text-yellow-400">
-                  Construction
-                </span>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+          {/* Brand Column */}
+          <div className="space-y-6 text-center md:text-left flex flex-col items-center md:items-start">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center font-black text-2xl italic shadow-glow-orange">VM</div>
+              <div className="flex flex-col text-left">
+                <span className="font-bold text-2xl tracking-tighter">VD MAHALE</span>
+                <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-orange-500/80">Infrastructure</span>
               </div>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-5">
-              Building India&apos;s future with world-class infrastructure,
-              innovative engineering, and unwavering commitment to quality since 2005.
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
+              Building India's future through world-class infrastructure, precision engineering, and a commitment to sustainable growth since 2005.
             </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black transition-all duration-200"
-                  aria-label={social.label}
+            <div className="flex gap-4 justify-center md:justify-start">
+              {[FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiYoutube, FaWhatsapp].map((Icon, i) => (
+                <a 
+                  key={i} 
+                  href="#" 
+                  className="w-10 h-10 rounded-xl glass-card glass-l1 flex items-center justify-center text-gray-400 hover:text-white hover:border-accent hover:shadow-glow-orange transition-all duration-300"
                 >
-                  <social.icon size={16} />
+                  <Icon size={18} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white font-bold mb-5 text-lg">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
-                    className="text-gray-400 hover:text-yellow-400 transition-colors text-sm flex items-center gap-2"
-                  >
-                    <FaArrowRight size={10} className="text-yellow-500/50" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Links Columns */}
+          {Object.entries(footerLinks).map(([key, links]) => (
+            <div key={key}>
+              <h4 className="text-lg font-bold mb-8 relative inline-block group capitalize text-center w-full md:w-auto md:text-left">
+                {key}
+                <span className="absolute -bottom-2 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 w-8 h-[3px] bg-accent rounded-full transition-all duration-300 group-hover:w-full" />
+              </h4>
+              <ul className="space-y-4 text-center md:text-left">
+                {links.map((link) => (
+                  <li key={link.name}>
+                    <a href={link.href} className="text-gray-400 hover:text-white text-sm flex items-center group transition-colors">
+                      <span className="w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-4 group-hover:mr-3" />
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="text-white font-bold mb-5 text-lg">Our Services</h4>
-            <ul className="space-y-3">
-              {serviceLinks.map((service) => (
-                <li key={service}>
-                  <span className="text-gray-400 text-sm flex items-center gap-2">
-                    <FaArrowRight size={10} className="text-yellow-500/50" />
-                    {service}
-                  </span>
-                </li>
-              ))}
-            </ul>
+        {/* Contact Info Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10 border-y border-white/5 mb-12">
+          <div className="flex items-center gap-4 justify-center md:justify-start">
+            <div className="w-12 h-12 rounded-2xl glass-card glass-l1 flex items-center justify-center text-accent shrink-0">
+              <FiPhone size={20} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Call Support</p>
+              <p className="text-white font-bold tracking-tight">+91-141-4106040</p>
+            </div>
           </div>
+          <div className="flex items-center gap-4 justify-center md:justify-start">
+            <div className="w-12 h-12 rounded-2xl glass-card glass-l1 flex items-center justify-center text-accent shrink-0">
+              <FiMail size={20} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Email Inquiry</p>
+              <p className="text-white font-bold tracking-tight">info@vdmahale.com</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 justify-center md:justify-start sm:col-span-2 lg:col-span-1">
+            <div className="w-12 h-12 rounded-2xl glass-card glass-l1 flex items-center justify-center text-accent shrink-0">
+              <FiMapPin size={20} />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Offices</p>
+              <p className="text-white font-bold tracking-tight">Mumbai, Maharashtra, IND</p>
+            </div>
+          </div>
+        </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-white font-bold mb-5 text-lg">Contact Info</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-yellow-400 mt-1 shrink-0" size={14} />
-                <span className="text-gray-400 text-sm">
-                  VD Mahale Tower, Senapati Bapat Road, Pune, Maharashtra 411016
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <FaPhone className="text-yellow-400 shrink-0" size={14} />
-                <span className="text-gray-400 text-sm">+91 98765 43210</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <FaEnvelope className="text-yellow-400 shrink-0" size={14} />
-                <span className="text-gray-400 text-sm">info@vdmahale.com</span>
-              </li>
-            </ul>
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4 border-t border-white/5 opacity-60">
+          <p className="text-xs text-gray-400">
+            &copy; {currentYear} VD Mahale Infrastructure Pvt. Ltd. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            <a href="#" className="text-xs text-gray-400 hover:text-white">Privacy Policy</a>
+            <a href="#" className="text-xs text-gray-400 hover:text-white">Terms of Service</a>
+            <a href="#" className="text-xs text-gray-400 hover:text-white">Sitemap</a>
           </div>
+          <button 
+            onClick={scrollToTop}
+            className="w-10 h-10 rounded-full glass-card glass-l1 flex items-center justify-center text-white hover:bg-accent hover:border-accent transition-all group"
+          >
+            <FiArrowUp className="group-hover:-translate-y-1 transition-transform" />
+          </button>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} VD Mahale Construction. All Rights Reserved.
-          </p>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-yellow-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-yellow-400 transition-colors">Terms of Service</a>
-          </div>
-        </div>
+      {/* Silhouette Decorative SVG */}
+      <div className="absolute bottom-0 left-0 w-full opacity-5 pointer-events-none translate-y-1">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 120H1440V80L1380 60L1320 80L1260 40L1200 70L1140 30L1080 60L1020 20L960 50L900 10L840 40L780 0L720 30L660 10L600 40L540 20L480 50L420 30L360 60L300 40L240 70L180 50L120 80L60 60L0 80V120Z" fill="white"/>
+        </svg>
       </div>
     </footer>
   );

@@ -1,0 +1,76 @@
+:root {
+  /* Colors - VD Mahale Corporate Identity */
+  --primary-blue: #003366;
+  --primary-blue-light: #004080;
+  --primary-blue-dark: #002244;
+  --accent-orange: #F57C20;
+  --accent-orange-light: #FF9A44;
+  --accent-orange-dark: #D86A10;
+  --accent-orange-glow: rgba(245, 124, 32, 0.3);
+  --accent-orange-bg: #FFF3E8;
+  --teal: #0A8F96;
+  
+  /* Text Colors */
+  --text-dark: #1F2937;
+  --text-body: #4A4A4A;
+  --text-light: #6B7280;
+  --text-muted: #9CA3AF;
+  
+  /* Backgrounds */
+  --bg-white: #FFFFFF;
+  --bg-offwhite: #FAFAFA;
+  --bg-light: #F5F5F5;
+  --bg-gray: #F0F2F5;
+  --bg-dark-navy: #0A1628;
+  --bg-dark-navy-light: #0F1D32;
+  
+  /* Borders */
+  --border-light: #E8E8E8;
+  --border-medium: #D1D5DB;
+  
+  /* Feedback */
+  --success-green: #28A745;
+  --warning-amber: #FFC107;
+  --error-red: #DC3545;
+  --info-blue: #3B82F6;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.08);
+  --shadow-orange: 0 4px 15px rgba(245, 124, 32, 0.3);
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 50%;
+  
+  /* Typography */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Layout */
+  --container-width: 1280px;
+  --sidebar-width: 260px;
+  --nav-height: 80px;
+  --nav-height-scrolled: 70px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+  
+  /* Z-index */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-tooltip: 600;
+  --z-toast: 700;
+}

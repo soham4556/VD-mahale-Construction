@@ -1,0 +1,93 @@
+/* 
+  Animations Suite for VD Mahale Infra 
+  Keyframes for AOS-like reveals and interactive micro-animations
+*/
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 124, 32, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(245, 124, 32, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 124, 32, 0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes skeletonPulse {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Helper Animation Classes */
+.animate-up { animation: fadeInUp 0.8s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-kenburns { animation: kenBurns 20s infinite alternate linear; }
+.pulse-glow { animation: pulse 2s infinite; }
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s infinite;
+}

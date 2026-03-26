@@ -1,54 +1,85 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { ThemeProvider } from './context/ThemeContext';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Projects from './components/Projects';
-import Stats from './components/Stats';
-import WhyChooseUs from './components/WhyChooseUs';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
-import Loader from './components/Loader';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-const App = () => {
-  const [loading, setLoading] = useState(true);
+// Components
+import Navbar from './components/common/Navbar';
+import BottomBar from './components/common/BottomBar';
+import Footer from './components/common/Footer';
+import FloatingButtons from './components/common/FloatingButtons';
+import ScrollToTop from './components/common/ScrollToTop';
+import InitialLoader from './components/common/InitialLoader';
+import PageWrapper from './components/common/PageWrapper';
+import ScrollProgress from './components/common/ScrollProgress';
+import CookieConsent from './components/common/CookieConsent';
+
+import Home from './pages/Home';
+
+// Lazy Loaded Pages
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const Projects = lazy(() => import('./pages/Projects'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const Infrastructure = lazy(() => import('./pages/Infrastructure'));
+const Careers = lazy(() => import('./pages/Careers'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Media = lazy(() => import('./pages/Media'));
+const ERPLogin = lazy(() => import('./pages/ERPLogin'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+function App() {
+  const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-cubic',
+    });
   }, []);
 
-  return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        <AnimatePresence>
-          {loading && <Loader />}
-        </AnimatePresence>
+  // Refresh AOS on route change
+  useEffect(() => {
+    AOS.refresh();
+  }, [location]);
 
-        {!loading && (
-          <>
-            <Navbar />
-            <main>
-              <Hero />
-              <About />
-              <Services />
-              <Projects />
-              <Stats />
-              <WhyChooseUs />
-              <Testimonials />
-              <Contact />
-            </main>
-            <Footer />
-            <ScrollToTop />
-          </>
-        )}
-      </div>
-    </ThemeProvider>
+  return (
+    <div className="app">
+      <ScrollProgress />
+      <InitialLoader />
+      <Navbar />
+      <BottomBar />
+      <FloatingButtons />
+      <ScrollToTop />
+      <CookieConsent />
+      
+      <main>
+        <AnimatePresence mode="wait">
+          <Suspense fallback={null}>
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+              <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+              <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
+              <Route path="/services/:slug" element={<PageWrapper><ServiceDetail /></PageWrapper>} />
+              <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+              <Route path="/projects/:slug" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
+              <Route path="/infrastructure" element={<PageWrapper><Infrastructure /></PageWrapper>} />
+              <Route path="/careers" element={<PageWrapper><Careers /></PageWrapper>} />
+              <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+              <Route path="/media" element={<PageWrapper><Media /></PageWrapper>} />
+              <Route path="/login" element={<PageWrapper><ERPLogin /></PageWrapper>} />
+              <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+            </Routes>
+          </Suspense>
+        </AnimatePresence>
+      </main>
+
+      <Footer />
+    </div>
   );
-};
+}
 
 export default App;

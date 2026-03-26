@@ -1,0 +1,321 @@
+/* 
+   VD MAHALE INFRA - GLOBAL ELITE STYLES (v2.0)
+   Standard resets, typography scale, and premium glass utilities
+*/
+
+/* FONT IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@600;700;800;900&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition-property: background-color, color, border-color, box-shadow, fill, stroke, opacity;
+  transition-duration: 0.35s;
+  transition-timing-function: ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-body);
+  background-color: var(--bg-page);
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===================================================================
+   PRECISION TYPOGRAPHY SCALE
+   =================================================================== */
+
+/* DISPLAY TEXT (Outfit) */
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.5vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--text-heading);
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--text-heading);
+}
+
+/* HEADINGS (Plus Jakarta Sans) */
+h1, .text-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 3.5vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--text-heading);
+}
+
+h2, .text-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  color: var(--text-heading);
+}
+
+h3, .text-h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-heading);
+}
+
+h4, .text-h4 {
+  font-family: var(--font-heading);
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-heading);
+}
+
+/* BODY TEXT (Inter) */
+p, .text-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin-bottom: 1.25rem;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  line-height: 1.78;
+}
+
+.text-body-sm {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* LABELS & OVERLINES */
+.text-overline {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* TECHNICAL NUMBERS (JetBrains Mono) */
+.text-stat-xl {
+  font-family: var(--font-mono);
+  font-size: clamp(38px, 4.5vw, 56px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+}
+
+/* ===================================================================
+   PREMIUM ELITE COMPONENTS
+   =================================================================== */
+
+/* GLASS CARDS */
+[class*="glass-l"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Noise Texture Overlay */
+[class*="glass-l"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--noise-texture);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
+html[data-theme="dark"] [class*="glass-l"]::after {
+  opacity: 0.3;
+}
+
+.project-card-v2 {
+  background: var(--glass-l2-bg);
+  backdrop-filter: blur(var(--glass-l2-blur)) saturate(var(--glass-l2-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-l2-blur)) saturate(var(--glass-l2-saturate));
+  border-radius: var(--glass-l2-radius);
+  overflow: hidden;
+  box-shadow: var(--glass-l2-shadow);
+  transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease, border-color 0.3s ease;
+  border: 1px solid var(--glass-l2-border);
+}
+
+.glass-card {
+  background: var(--glass-l2-bg);
+  backdrop-filter: blur(var(--glass-l2-blur)) saturate(var(--glass-l2-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-l2-blur)) saturate(var(--glass-l2-saturate));
+  border: 1px solid var(--glass-l2-border);
+  box-shadow: var(--glass-l2-shadow);
+  border-radius: var(--glass-l2-radius);
+  transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease, border-color 0.3s ease;
+  overflow: hidden; /* Added for shine sweep */
+}
+
+/* Shine sweep on cards */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 45%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 55%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+  transition: transform 0.8s ease;
+}
+
+.glass-card:hover::before {
+  transform: translateX(200%);
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent-glow);
+}
+
+
+.glass-l1 { 
+  background: var(--glass-l1-bg); 
+  backdrop-filter: blur(var(--glass-l1-blur)); 
+  border: 1px solid var(--glass-l1-border); 
+  box-shadow: var(--glass-l1-shadow);
+  border-radius: var(--glass-l1-radius);
+}
+
+.glass-l3 { 
+  background: var(--glass-l3-bg); 
+  backdrop-filter: blur(var(--glass-l3-blur)) saturate(var(--glass-l3-saturate)); 
+  border: 1px solid var(--glass-l3-border); 
+  box-shadow: var(--glass-l3-shadow);
+  border-radius: var(--glass-l3-radius);
+}
+
+.service-card-v2 {
+  background: var(--glass-l2-bg);
+  backdrop-filter: blur(var(--glass-l2-blur)) saturate(var(--glass-l2-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-l2-blur)) saturate(var(--glass-l2-saturate));
+  border-radius: var(--glass-l2-radius);
+  overflow: hidden;
+  box-shadow: var(--glass-l2-shadow);
+  transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease, border-color 0.3s ease;
+  position: relative;
+  border: 1px solid var(--glass-l2-border);
+}
+
+.service-card-v2:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent-glow);
+}
+
+/* GLASS INPUTS */
+.glass-input {
+  background: var(--glass-l1-bg);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--border-light);
+  border-radius: 12px;
+  height: 48px;
+  padding: 12px 18px;
+  font-size: 15px;
+  color: var(--text-heading);
+  transition: all 0.3s ease;
+  width: 100%;
+  outline: none;
+}
+
+.glass-input:focus {
+  border-color: var(--accent-glow);
+  box-shadow: 0 0 0 4px var(--accent-subtle);
+  background: var(--bg-elevated);
+}
+
+/* GLASS BUTTONS */
+.btn-glass-primary {
+  background: var(--accent-gradient);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 14px 28px;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: var(--shadow-accent-glow);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-glass-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(245, 124, 32, 0.4);
+  filter: brightness(1.1);
+}
+
+/* DECORATIVE BLOBS */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: blobFloat 10s ease-in-out infinite alternate;
+}
+
+.blob-1 { width: 450px; height: 450px; background: radial-gradient(circle, var(--blob-1) 0%, transparent 70%); top: -10%; right: -5%; }
+.blob-2 { width: 380px; height: 380px; background: radial-gradient(circle, var(--blob-2) 0%, transparent 70%); bottom: 10%; left: -5%; animation-duration: 14s; }
+
+@keyframes blobFloat {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-40px) scale(1.1); }
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Layout Utilities */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.section-padding { padding: 100px 0; }
+
+@media (max-width: 768px) {
+  .section-padding { padding: 60px 0; }
+  .container { padding: 0 20px; }
+}

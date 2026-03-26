@@ -1,74 +1,107 @@
-@import "tailwindcss";
+/* ===================================================================
+   VD MAHALE INFRA - STYLES ARCHITECTURE
+   Single Source of Truth for all Global Styles
+   =================================================================== */
 
-/* ========================================
-   VD Mahale Construction — Global Styles
-   ======================================== */
+/* Section 1: Design Tokens & Variables */
+@import './styles/design-tokens.css';
+@import './styles/global.css';
+@import './styles/responsive.css';
+@import './styles/premium-polish.css';
 
-/* Custom Theme Configuration */
-@theme {
-  --color-yellow-400: #FBBF24;
-  --color-yellow-500: #F59E0B;
-  --color-yellow-600: #D97706;
+/* Section 2: Component Libraries */
+@import './styles/cards.css';
+@import './styles/card-variants.css';
+
+/* Section 3: Layout & Utility */
+:root {
+  --nav-height: 100px;
+  --nav-height-scrolled: 70px;
+  --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ========================================
-   Base Styles
-   ======================================== */
-
-* {
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-body);
+  line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ========================================
-   Scrollbar Styling
-   ======================================== */
-
-::-webkit-scrollbar {
-  width: 8px;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-::-webkit-scrollbar-track {
-  background: #1f2937;
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-normal);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #F59E0B;
-  border-radius: 4px;
+ul {
+  list-style: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #D97706;
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* ========================================
-   Text Selection
-   ======================================== */
+/* Grid Layouts */
 
-::selection {
-  background-color: #F59E0B;
-  color: #000;
+.grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
-/* ========================================
-   Line Clamp Utility
-   ======================================== */
+/* Section Spacing */
+.section-padding {
+  padding: 100px 0;
+}
 
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Loading & Skeleton Utilities */
+.skeleton-box {
+  background: var(--bg-tertiary);
+  background-image: linear-gradient(
+    90deg, 
+    rgba(255,255,255,0) 0, 
+    rgba(255,255,255,0.05) 50%, 
+    rgba(255,255,255,0) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shift 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-shift {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+.hero-bg.loading {
+  background-color: var(--bg-primary);
+  filter: blur(20px);
+}
+
+.hero-bg.loaded {
+  filter: blur(0);
+  transition: filter 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 0;
+  }
 }

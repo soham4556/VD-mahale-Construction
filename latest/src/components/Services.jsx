@@ -1,103 +1,125 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FaRoad, FaBuilding, FaHardHat, FaProjectDiagram, FaArchway, FaTint } from 'react-icons/fa';
+import { FiSettings, FiActivity, FiBriefcase, FiTruck } from 'react-icons/fi';
+import { FaRoad, FaHardHat } from 'react-icons/fa';
+import ServiceCard from './Cards/ServiceCard';
 
 const services = [
   {
     icon: FaRoad,
-    title: 'Road Construction',
-    description: 'State-of-the-art highway and road construction with advanced materials and techniques for lasting durability.',
-    color: 'from-yellow-400 to-orange-500',
+    title: 'Highways & Expressways',
+    description: 'Specializing in large-scale road construction with high-grade asphalt and concrete surfacing for national connectivity.',
+    image: '/images/service-1.png'
   },
   {
-    icon: FaBuilding,
-    title: 'Infrastructure Development',
-    description: 'Comprehensive infrastructure solutions including commercial complexes, industrial parks, and urban developments.',
-    color: 'from-yellow-500 to-yellow-600',
+    icon: FiTruck,
+    title: 'Railway Infrastructure',
+    description: 'Comprehensive solutions for railway track laying, earthworks, and bridge construction for modern transit systems.',
+    image: '/images/service-2.png'
   },
   {
     icon: FaHardHat,
-    title: 'Civil Engineering',
-    description: 'Expert civil engineering services covering structural design, geotechnical analysis, and construction management.',
-    color: 'from-orange-400 to-orange-600',
+    title: 'Bridges & Flyovers',
+    description: 'Engineering complex structures and overpasses to facilitate smooth urban transit and inter-city crossings.',
+    image: '/images/service-3.png'
   },
   {
-    icon: FaProjectDiagram,
-    title: 'Project Management',
-    description: 'End-to-end project management ensuring timely delivery, cost efficiency, and uncompromised quality standards.',
-    color: 'from-yellow-400 to-yellow-500',
+    icon: FiSettings,
+    title: 'Renewable Energy',
+    description: 'EPC services for solar and wind farms, supporting India\'s transition to clean and sustainable energy sources.',
+    image: '/images/service-4.png'
   },
   {
-    icon: FaArchway,
-    title: 'Bridge Construction',
-    description: 'Design and construction of bridges ranging from small spans to large-scale multi-lane highway overpasses.',
-    color: 'from-orange-500 to-red-500',
+    icon: FiActivity,
+    title: 'Metro Rail Projects',
+    description: 'Developing urban metro networks including elevated corridors and underground tunnel systems.',
+    image: '/images/service-1.png'
   },
   {
-    icon: FaTint,
-    title: 'Water Infrastructure',
-    description: 'Dam construction, irrigation canals, water treatment facilities, and stormwater management systems.',
-    color: 'from-yellow-500 to-orange-500',
-  },
+    icon: FiBriefcase,
+    title: 'Smart City Dev',
+    description: 'Implementing integrated urban planning and smart infrastructure for the next generation of Indian cities.',
+    image: '/images/service-2.png'
+  }
 ];
 
 const Services = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
   return (
-    <section id="services" className="py-24 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-yellow-500 font-semibold text-sm tracking-wider uppercase">
-            What We Do
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            Our <span className="text-yellow-500">Services</span>
-          </h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Delivering comprehensive construction and infrastructure solutions 
-            with unmatched expertise and innovation.
-          </p>
-          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mx-auto rounded-full" />
-        </motion.div>
+    <section id="services" className="relative py-32 bg-secondary overflow-hidden">
+      {/* Background Blobs */}
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      
+      {/* Decorative Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <svg width="100%" height="100%">
+          <pattern id="dotGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1" fill="currentColor" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#dotGrid)" />
+        </svg>
+      </div>
 
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="overline-label mb-4"
+          >
+            Capabilities
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold mb-6"
+          >
+            Engineering Excellence in <br/>
+            <span className="text-accent underline-effect">Every Dimension</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-secondary"
+          >
+            VD Mahale Infra provides end-to-end solutions for the nation's most critical 
+            infrastructure challenges, delivering projects that stand the test of time.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div
+            <ServiceCard 
               key={service.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden"
-            >
-              {/* Hover gradient overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                <service.icon className="text-white" size={24} />
-              </div>
-
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                {service.description}
-              </p>
-
-              {/* Arrow link */}
-              <div className="mt-5 flex items-center text-yellow-500 font-medium text-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                Learn More <span className="ml-2">→</span>
-              </div>
-            </motion.div>
+              {...service}
+              index={index}
+            />
           ))}
         </div>
+
+        {/* Bottom CTA Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 p-8 glass-card glass-l1 border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 text-center md:text-left shadow-lg"
+        >
+          <div>
+            <h4 className="text-xl font-bold mb-1">Looking for a specialized solution?</h4>
+            <p className="text-secondary text-sm">Our expert team can design custom infrastructure plans for your specific requirements.</p>
+          </div>
+          <a 
+            href="#contact" 
+            aria-label="Book a consultation with our infrastructure experts"
+            className="px-8 py-4 bg-accent text-white font-bold rounded-xl shadow-glow-orange hover:-translate-y-1 transition-all whitespace-nowrap"
+          >
+            Consult with Experts
+          </a>
+        </motion.div>
       </div>
     </section>
   );

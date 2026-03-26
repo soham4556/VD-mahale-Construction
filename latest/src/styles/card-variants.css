@@ -1,0 +1,220 @@
+.service-card {
+  height: 100%;
+}
+
+.icon-glass {
+  width: 64px;
+  height: 64px;
+  background: var(--lm-primary-subtle);
+  border: 1px solid var(--glass-l1-border);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-blue);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+[data-theme='dark'] .icon-glass {
+  background: rgba(96, 165, 250, 0.1);
+  color: var(--primary);
+}
+
+.service-card:hover .icon-glass {
+  background: var(--primary-blue);
+  color: white;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.project-category-chip {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-heading);
+  border: 1px solid var(--border-glass);
+  z-index: 10;
+}
+
+.btn-premium-pilled-sm {
+  background: var(--btn-gradient);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-premium-pilled-sm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--btn-shadow);
+}
+
+.icon-btn-glass {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-nav-pills);
+  color: var(--text-nav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-btn-glass:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+/* Team Card Specifics */
+.team-img-h { height: 320px; }
+
+.team-social-floater {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateX(100px);
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.team-card:hover .team-social-floater {
+  transform: translateX(0);
+}
+
+.social-pill-glass {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-glass);
+  color: var(--text-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-pill-glass:hover {
+  background: var(--accent-orange);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Testimonial Card Specifics */
+.quote-icon-glass {
+  font-size: 40px;
+  color: var(--accent-orange);
+  opacity: 0.2;
+  margin-bottom: 20px;
+}
+
+.author-img-glass {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent-orange);
+}
+
+.author-img-glass img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Stat Card Specifics */
+.stat-val { font-size: 3.5rem; color: var(--primary-blue); letter-spacing: -2px; }
+[data-theme='dark'] .stat-val { color: white; }
+.stat-suffix { font-size: 2rem; margin-left: 5px; }
+
+/* News Card Specifics */
+.news-img-h { height: 240px; }
+.news-cat-tag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-orange);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.news-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+.news-link-btn:hover { color: var(--accent-orange); }
+
+/* Job Card Specifics */
+.job-badge-glass {
+  background: var(--bg-nav-pills);
+  border: 1px solid var(--border-glass);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  color: var(--text-nav);
+}
+
+/* Plant Card Specifics */
+.plant-img-h { height: 220px; }
+.plant-tech-badge {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  background: rgba(10, 22, 40, 0.8);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+.plant-cap-bubble {
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+}
+[data-theme='dark'] .plant-cap-bubble {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

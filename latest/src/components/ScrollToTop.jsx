@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowUp } from 'react-icons/fa';
+import { FiArrowUp } from 'react-icons/fi';
 
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
@@ -19,14 +19,16 @@ const ScrollToTop = () => {
     <AnimatePresence>
       {visible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, y: 20, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.8 }}
+          whileHover={{ y: -5, scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 text-black rounded-full shadow-lg shadow-yellow-400/30 flex items-center justify-center hover:from-yellow-500 hover:to-yellow-600 hover:-translate-y-1 transition-all duration-200"
+          className="fixed bottom-10 right-10 z-50 w-14 h-14 rounded-2xl glass-card glass-l3 border-white/20 text-white flex items-center justify-center shadow-2xl hover:bg-accent hover:border-accent group transition-all duration-300"
           aria-label="Scroll to top"
         >
-          <FaArrowUp size={18} />
+          <FiArrowUp size={24} className="group-hover:-translate-y-1 transition-transform" />
         </motion.button>
       )}
     </AnimatePresence>

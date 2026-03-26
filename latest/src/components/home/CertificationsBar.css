@@ -1,0 +1,57 @@
+.certs-section {
+  padding: 60px 0;
+  background-color: var(--bg-dark-navy);
+  color: white;
+}
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.certs-info h3 { color: white; margin-bottom: 10px; }
+.certs-info p { color: rgba(255,255,255,0.6); margin-bottom: 0; }
+
+.certs-list {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cert-logo-box {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.cert-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-text strong { font-size: 15px; }
+.cert-text span { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+@media (max-width: 992px) {
+  .certs-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .certs-list {
+    justify-content: center;
+  }
+}

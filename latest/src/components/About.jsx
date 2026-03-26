@@ -1,102 +1,134 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaBullseye, FaEye } from 'react-icons/fa';
+import { FiTarget, FiEye, FiCheckCircle, FiShield } from 'react-icons/fi';
 
 const About = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section id="about" className="py-24 bg-white dark:bg-gray-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-yellow-500 font-semibold text-sm tracking-wider uppercase">
-            Who We Are
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            About <span className="text-yellow-500">VD Mahale</span>
-          </h2>
-          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mx-auto rounded-full" />
-        </motion.div>
+    <section id="about" className="relative py-32 bg-primary overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-1/4 -right-20 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image */}
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Image Side */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            {/* Main Image with Glass Frame */}
+            <div className="relative z-10 rounded-[2rem] overflow-hidden glass-card glass-l2 p-2 md:p-3">
               <img
                 src="/images/about.png"
-                alt="VD Mahale team at work"
-                className="w-full h-[400px] lg:h-[500px] object-cover"
+                alt="VD Mahale Construction Excellence"
+                className="w-full h-[350px] sm:h-[450px] lg:h-[600px] object-cover rounded-[1.5rem] grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1121]/40 to-transparent pointer-events-none" />
             </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-6 -right-4 sm:-right-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl p-5 shadow-xl">
-              <div className="text-3xl font-black text-black">18+</div>
-              <div className="text-sm font-semibold text-black/70">Years of<br/>Excellence</div>
-            </div>
-            {/* Decorative accent */}
-            <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-yellow-400/30 rounded-2xl" />
+
+            {/* Experience Badge */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={inView ? { scale: 1, opacity: 1 } : {}}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="absolute -bottom-6 -right-4 md:-right-10 z-20 glass-card glass-l4 border-white/20 p-5 md:p-8 shadow-2xl"
+            >
+              <div className="text-3xl md:text-5xl font-black text-accent mb-1 font-mono tracking-tighter">18+</div>
+              <div className="text-[9px] md:text-[10px] uppercase font-bold tracking-[0.3em] text-white/60 leading-tight">
+                Years of Pure<br/>Engineering Excellence
+              </div>
+            </motion.div>
+
+            {/* Decorative Shape */}
+            <div className="absolute -top-10 -left-10 w-40 h-40 border-2 border-dashed border-white/10 rounded-full animate-spin-slow" />
           </motion.div>
 
-          {/* Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-          >
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
-              Crafting World-Class Infrastructure Since 2005
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              VD Mahale Construction is one of India&apos;s leading infrastructure companies,
-              specializing in highway construction, bridges, commercial complexes, and
-              large-scale civil engineering projects. With over 18 years of experience,
-              we&apos;ve built a reputation for delivering projects on time, on budget, and
-              beyond expectations.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-              Our team of 200+ skilled engineers, architects, and project managers work
-              with cutting-edge technology and sustainable practices to create
-              infrastructure that stands the test of time.
-            </p>
-
-            {/* Mission & Vision Cards */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="p-5 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
-                <div className="w-10 h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center mb-3">
-                  <FaBullseye className="text-yellow-500" size={20} />
-                </div>
-                <h4 className="font-bold text-gray-900 dark:text-white mb-2">Our Mission</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  To deliver innovative, sustainable infrastructure that empowers
-                  communities and drives economic growth.
-                </p>
-              </div>
-              <div className="p-5 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
-                <div className="w-10 h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center mb-3">
-                  <FaEye className="text-yellow-500" size={20} />
-                </div>
-                <h4 className="font-bold text-gray-900 dark:text-white mb-2">Our Vision</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  To become the most trusted name in Indian infrastructure,
-                  setting global benchmarks in quality and innovation.
-                </p>
-              </div>
+          {/* Text Side */}
+          <div className="space-y-10">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                className="overline-label mb-4"
+              >
+                Our Legacy
+              </motion.div>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-5xl font-bold mb-8 leading-tight"
+              >
+                Crafting India's <br/>
+                <span className="text-gradient-accent underline-effect">Modern Landmarks</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 }}
+                className="text-secondary text-lg leading-relaxed"
+              >
+                Established in 2005, VD Mahale Infrastructure has emerged as a powerhouse 
+                in civil engineering. We don't just build structures; we create life-lines 
+                that connect cities, foster communities, and drive national progress.
+              </motion.p>
             </div>
-          </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3 }}
+              className="grid sm:grid-cols-2 gap-6"
+            >
+              {/* Mission */}
+              <div className="glass-card glass-l1 p-6 hover:border-accent/30 transition-all group shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-accent mb-5 group-hover:scale-110 transition-transform">
+                  <FiTarget size={24} />
+                </div>
+                <h4 className="text-xl font-bold mb-3">Our Mission</h4>
+                <p className="text-sm text-secondary leading-relaxed">
+                  To deliver sustainable infrastructure solutions through innovative engineering and precision execution.
+                </p>
+              </div>
+
+              {/* Vision */}
+              <div className="glass-card glass-l1 p-6 hover:border-accent/30 transition-all group shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-accent mb-5 group-hover:scale-110 transition-transform">
+                  <FiEye size={24} />
+                </div>
+                <h4 className="text-xl font-bold mb-3">Our Vision</h4>
+                <p className="text-sm text-secondary leading-relaxed">
+                  To be the gold standard in construction by setting new benchmarks in quality, safety, and reliability.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Core Values Strip */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.6 }}
+              className="pt-4 flex flex-wrap gap-8 opacity-60"
+            >
+              <div className="flex items-center gap-2">
+                <FiCheckCircle className="text-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-primary dark:text-white">Quality Driven</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FiShield className="text-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-primary dark:text-white">Safety First</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FiTarget className="text-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-primary dark:text-white">Timely Delivery</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

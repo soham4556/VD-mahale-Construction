@@ -1,0 +1,70 @@
+.erp-login-page {
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.erp-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.erp-card {
+  background-color: white;
+  padding: 60px 50px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border-light);
+}
+
+.erp-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.erp-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 20px;
+}
+
+.erp-header h2 { font-size: 1.5rem; margin-bottom: 10px; }
+.erp-header p { font-size: 13px; color: var(--text-muted); }
+
+.erp-form .input-group { margin-bottom: 25px; }
+.erp-form label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+.erp-form input { width: 100%; padding: 15px; border: 1px solid var(--border-light); border-radius: var(--radius-md); outline: none; }
+.erp-form input:focus { border-color: var(--primary-blue); }
+
+.form-utils { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; font-size: 13px; }
+.forgot-link { color: var(--accent-orange); font-weight: 600; }
+
+.erp-notice {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--error-red);
+  background-color: #FFF5F5;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.back-to-site { text-align: center; margin-top: 30px; }
+.back-to-site a { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+.back-to-site a:hover { color: var(--primary-blue); }
+
+@media (max-width: 576px) {
+  .erp-card { padding: 40px 25px; }
+}
