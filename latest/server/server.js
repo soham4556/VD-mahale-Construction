@@ -39,7 +39,7 @@ app.use('/api/reports', generateRoutes('DailyReport'));
 if (process.env.NODE_ENV === 'production') {
   const staticPath = path.join(__dirname, '../dist');
   app.use(express.static(staticPath));
-  app.get('*', (req, res) => {
+  app.get(/(.*)/, (req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));
   });
 }
